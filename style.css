@@ -1,0 +1,699 @@
+:root {
+    --bg-color: #f4f6f8;
+    --text-color: #1f2937;
+    --card-bg: #ffffff;
+    --card-sub-bg: #f8fafc;
+    --border-color: #d1d5db;
+    --primary-btn: #111827;
+    --primary-btn-hover: #1f2937;
+    --secondary-btn: #4b5563;
+    --danger-btn: #ef4444;
+    --subtext-color: #6b7280;
+}
+
+body.dark-theme {
+    --bg-color: #111827;
+    --text-color: #f9fafb;
+    --card-bg: #1f2937;
+    --card-sub-bg: #374151;
+    --border-color: #4b5563;
+    --primary-btn: #3b82f6;
+    --primary-btn-hover: #2563eb;
+    --secondary-btn: #6b7280;
+    --danger-btn: #dc2626;
+    --subtext-color: #9ca3af;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   FUNDO ANIMADO
+========================================= */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.13;
+    pointer-events: none;
+    z-index: -1;
+}
+
+body::before {
+    background: #6366f1;
+    top: -180px;
+    left: -140px;
+    animation: floatingOrb1 14s ease-in-out infinite alternate;
+}
+
+body::after {
+    background: #8b5cf6;
+    right: -180px;
+    bottom: -180px;
+    animation: floatingOrb2 16s ease-in-out infinite alternate;
+}
+
+@keyframes floatingOrb1 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(100px, 70px) scale(1.15);
+    }
+
+    100% {
+        transform: translate(-30px, 120px) scale(0.95);
+    }
+}
+
+@keyframes floatingOrb2 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(-100px, -70px) scale(1.2);
+    }
+
+    100% {
+        transform: translate(-40px, 40px) scale(0.9);
+    }
+}
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+header {
+    margin-bottom: 35px;
+    text-align: center;
+    animation: fadeDown 0.7s ease forwards;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.logo {
+    background: var(--primary-btn);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.logo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+#themeToggle {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.25s ease;
+}
+
+#themeToggle:hover {
+    transform: translateY(-2px);
+    background: var(--card-sub-bg);
+    border-color: var(--primary-btn);
+}
+
+header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+header p {
+    color: var(--subtext-color);
+    font-size: 16px;
+}
+
+/* =========================================
+   ANIMAÇÃO DE ENTRADA
+========================================= */
+
+.card,
+.resultado {
+    animation: fadeUp 0.7s ease both;
+}
+
+.card:nth-of-type(1) {
+    animation-delay: 0.1s;
+}
+
+.card:nth-of-type(2) {
+    animation-delay: 0.2s;
+}
+
+.card:nth-of-type(3) {
+    animation-delay: 0.3s;
+}
+
+.card:nth-of-type(4) {
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   CARDS
+========================================= */
+
+.card,
+.resultado {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    border: 1px solid transparent;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.card:hover,
+.resultado:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.10);
+    border-color: var(--border-color);
+}
+
+/* =========================================
+   RESULTADO HEADER
+========================================= */
+
+.resultado-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.historico-controles {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 16px;
+    background: var(--card-sub-bg);
+    color: var(--text-color);
+    outline: none;
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.2s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: var(--primary-btn);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+    transform: translateY(-1px);
+}
+
+/* Remove as setinhas dos campos number */
+
+/* Chrome, Edge, Safari */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.inputs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* =========================================
+   BOTÕES
+========================================= */
+
+.btn-primary {
+    width: 100%;
+    margin-top: 25px;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary-btn);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: var(--primary-btn-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background: var(--secondary-btn);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+.btn-danger {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background: var(--danger-btn);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-danger:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(239, 68, 68, 0.20);
+}
+
+/* =========================================
+   CARDS DE RESULTADO
+========================================= */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.result-card {
+    background: var(--card-sub-bg);
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.result-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.result-card span {
+    color: var(--subtext-color);
+    font-size: 14px;
+}
+
+.result-card strong {
+    font-size: 20px;
+}
+
+/* =========================================
+   GRÁFICOS
+========================================= */
+
+.chart-box,
+.analysis-box {
+    margin-top: 25px;
+    background: var(--card-sub-bg);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.chart-container {
+    position: relative;
+    max-width: 320px;
+    height: 260px;
+    margin: 0 auto;
+}
+
+.chart-container-line {
+    position: relative;
+    width: 100%;
+    height: 250px;
+}
+
+/* =========================================
+   INVESTIMENTOS
+========================================= */
+
+.invest-list {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.invest-list li {
+    margin-bottom: 8px;
+}
+
+/* =========================================
+   BARRA DE PROGRESSO
+========================================= */
+
+.progress-bar-bg {
+    width: 100%;
+    height: 12px;
+    background: var(--border-color);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: #10b981;
+    transition: width 0.8s ease;
+}
+
+/* =========================================
+   HISTÓRICO EXPANDIDO
+========================================= */
+
+.historico-lista-container {
+    margin-top: 30px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+.historico-lista-container h4 {
+    margin-bottom: 15px;
+}
+
+.empty-msg {
+    color: var(--subtext-color);
+    font-style: italic;
+}
+
+.historico-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+}
+
+.historico-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.historico-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.historico-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+.historico-card-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.btn-action-load {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.btn-action-load:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.btn-action-delete {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.btn-action-delete:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.historico-card-body p {
+    font-size: 14px;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.historico-card-details {
+    font-size: 13px;
+    color: var(--subtext-color);
+}
+
+.historico-card-details summary {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.historico-card-details ul {
+    list-style: none;
+    padding-left: 10px;
+    margin-top: 5px;
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .inputs-grid,
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        width: 94%;
+        margin: 25px auto;
+    }
+
+    .card,
+    .resultado {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 26px;
+    }
+
+    .header-top {
+        gap: 10px;
+    }
+}
+
+/* =========================================
+   ACESSIBILIDADE
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* =========================================
+   IMPRESSÃO
+========================================= */
+
+@media print {
+
+    #themeToggle,
+    .btn-primary,
+    .btn-secondary,
+    .btn-danger,
+    header button,
+    button {
+        display: none !important;
+    }
+
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    body::before,
+    body::after {
+        display: none !important;
+    }
+
+    .card,
+    .resultado {
+        box-shadow: none !important;
+        border: 1px solid #ccc;
+    }
+}
+/* =====================================================
+   REMOVER SETAS DOS INPUTS (NUMBER E SELECT)
+===================================================== */
+
+/* Esconde as setas no Chrome, Safari, Edge e Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Esconde as setas no Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Se o ícone for de um elemento <select>, remove a seta/estilo nativo */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
